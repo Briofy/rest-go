@@ -1,4 +1,4 @@
-module github.com/mrjosh/respond.go
+module github.com/Briofy/respond.go
 
 go 1.16
 

@@ -3,8 +3,8 @@ package respond
 import (
 	"sync"
 
-	"github.com/mrjosh/respond.go/translations/en"
-	"github.com/mrjosh/respond.go/translations/fa"
+	"github.com/Briofy/respond.go/translations/en"
+	"github.com/Briofy/respond.go/translations/fa"
 )
 
 type Messages struct {

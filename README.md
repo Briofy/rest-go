@@ -2,12 +2,12 @@
 This package is provided to be used on golang and it gives clean methods to handle json response with specific predetermined messages.
 
 ## Install
-$ go get github.com/mrjosh/respond.go
+$ go get github.com/Briofy/respond.go
 
 ## Usage
 import package
 ```go
-import "github.com/mrjosh/respond.go"
+import "github.com/Briofy/respond.go"
 ```
 
 create respond instance
