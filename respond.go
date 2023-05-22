@@ -116,7 +116,7 @@ func (r *Respond) writeJSON(data interface{}) error {
 func (r *Respond) RespondWithResult(result interface{}) {
 	r.writer.WriteHeader(r.statusCode)
 	r.writeJSON(map[string]interface{}{
-		"status": r.statusText,
+		"succeed": !r.hasErrors,
 		"result": result,
 	})
 }
@@ -256,7 +256,7 @@ func (r *Respond) MethodNotAllowed() {
 // @param translations map[string]interface{}
 func (r *Respond) ValidationErrors(errors interface{}) {
 	r.SetStatusCode(420).
-		SetStatusText(r.Messages().Failed).
+		SetHasErrors(true).
 		SetErrorCode(5420).
 		RespondWithResult(errors)
 }

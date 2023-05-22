@@ -55,7 +55,7 @@ func TestSucceed(t *testing.T) {
 	assert.NoError(t, err)
 
 	assert.Equal(t, map[string]interface{}{
-		"status": "success",
+		"succeed": true,
 		"result": map[string]interface{}{
 			"data": "Test",
 		},
@@ -232,7 +232,7 @@ func TestValidationErrors(t *testing.T) {
 	assert.NoError(t, err)
 
 	assert.Equal(t, map[string]interface{}{
-		"status": "failed",
+		"succeed": false,
 		"result": map[string]interface{}{
 			"data": "Test",
 		},
