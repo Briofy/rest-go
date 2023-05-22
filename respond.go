@@ -118,6 +118,7 @@ func (r *Respond) RespondWithResult(result interface{}) {
 	r.writeJSON(map[string]interface{}{
 		"succeed": !r.hasErrors,
 		"result": result,
+		//"metas": r.metas,
 	})
 }
 
@@ -159,7 +160,7 @@ func (r *Respond) NotFound() {
 // @param data map[string]interface{}
 func (r *Respond) Succeed(data interface{}) {
 	r.SetStatusCode(http.StatusOK).
-		SetStatusText(r.Messages().Success).
+		SetHasErrors(false).
 		RespondWithResult(data)
 }
 
@@ -324,6 +325,20 @@ func (r *Respond) SetHasErrors(hasErrors bool) *Respond {
     return r
 }
 
+func (r *Respond) Respond(result interface{}) {
+	r.writer.WriteHeader(r.statusCode)
+	r.writeJSON(map[string]interface{}{
+		"succeed": !r.hasErrors,
+		"result": result,
+	})
+}
+func (r *Respond) RespondWithError(statusCode int, errorCode int) {
+	message := r.Messages().Errors["general"]
+	r.SetStatusCode(statusCode).
+		SetHasErrors(true).
+		SetErrorCode(errorCode).
+		Respond(message["error"])
+}
 
 func (r *Respond) SetCreatedMessage() *Respond {
     message:= r.Messages().Errors["general"]
@@ -335,3 +350,4 @@ func (r *Respond) SetUpdatedMessage() *Respond {
     r.responseMessage = r.Messages().Errors["general"]["successful_update_message"].(string)
     return r
 }
+
