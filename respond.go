@@ -306,10 +306,10 @@ func (r *Respond) SetMetas(metas []interface{}) *Respond {
 }
 
 // get message of response,  default is successful
-func (r *Respond) Message() *Respond {
+func (r *Respond) Message() string {
     message := r.Messages().Errors["general"]
     r.responseMessage = message["successful_message"].(string)
-    return r
+    return r.responseMessage
 }
 
 // set message of response
