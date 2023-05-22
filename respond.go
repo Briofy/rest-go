@@ -13,6 +13,10 @@ type Respond struct {
 	lang       string
 	messages   *Messages
 	writer     http.ResponseWriter
+	metas          interface{}
+        additional     interface{}
+    	responseMessage string
+    	hasErrors       bool
 }
 
 // Set language of responses
@@ -287,4 +291,47 @@ func (r *Respond) Error(statusCode int, errorCode int) {
 		SetStatusText(r.Messages().Failed).
 		SetErrorCode(errorCode).
 		RespondWithMessage(message["message"])
+}
+
+// set additional of response
+func (r *Respond) SetAdditional(data map[string]interface{}) *Respond {
+    r.additional = data
+    return r
+}
+
+//set metadata for response
+func (r *Respond) SetMetas(metas []interface{}) *Respond {
+    r.metas = metas
+    return r
+}
+
+// get message of response,  default is successful
+func (r *Respond) Message() *Respond {
+    message := r.Messages().Errors["general"]
+    r.responseMessage = message["successful_message"].(string)
+    return r
+}
+
+// set message of response
+func (r *Respond) SetMessage(message string) *Respond {
+    r.responseMessage = message
+    return r
+}
+
+//set haseeror
+func (r *Respond) SetHasErrors(hasErrors bool) *Respond {
+    r.hasErrors = hasErrors
+    return r
+}
+
+
+func (r *Respond) SetCreatedMessage() *Respond {
+    message:= r.Messages().Errors["general"]
+    r.responseMessage = message["successful_message"].(string)
+    return r
+}
+
+func (r *Respond) SetUpdatedMessage() *Respond {
+    r.responseMessage = r.Messages().Errors["general"]["successful_update_message"].(string)
+    return r
 }
