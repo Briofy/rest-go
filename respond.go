@@ -118,7 +118,8 @@ func (r *Respond) RespondWithResult(result interface{}) {
 	r.writeJSON(map[string]interface{}{
 		"succeed": !r.hasErrors,
 		"result": result,
-		//"metas": r.metas,
+		"metas": r.metas,
+		"additional": r.additional,
 	})
 }
 
@@ -330,6 +331,8 @@ func (r *Respond) Respond(result interface{}) {
 	r.writeJSON(map[string]interface{}{
 		"succeed": !r.hasErrors,
 		"result": result,
+		"metas": r.metas,
+		"additional": r.additional,
 	})
 }
 func (r *Respond) RespondWithError(statusCode int, errorCode int) {

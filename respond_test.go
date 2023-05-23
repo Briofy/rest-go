@@ -59,6 +59,8 @@ func TestSucceed(t *testing.T) {
 		"result": map[string]interface{}{
 			"data": "Test",
 		},
+		"metas": nil,
+		"additional": nil,
 	}, expected)
 }
 
@@ -236,6 +238,8 @@ func TestValidationErrors(t *testing.T) {
 		"result": map[string]interface{}{
 			"data": "Test",
 		},
+		"metas": nil,
+		"additional": nil,
 	}, expected)
 }
 
